@@ -9,20 +9,20 @@ class Main extends Component {
 
   renderLinks = () => {
     return (
-      <p>p</p>
-    )
-  }
-  
-  render() {
-    return (
-      <div className="main">
-        <div className="links">          
+      <div className="links">          
           <Switch>          
             <Route exact path="/" component={Welcome} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/login" component={Login} />
           </Switch>
         </div>
+    )
+  }
+  
+  render() {
+    return (
+      <div className="main">
+        < Welcome/>
       </div>
     )
   }
