@@ -23,8 +23,8 @@ class Main extends Component {
     return (
       <div className="main">
         {this.renderLinks()}
-        <div className="welcome">
-          < Welcome />
+        <div className="test">
+          <p>test....</p>
         </div>
       </div>
     )
