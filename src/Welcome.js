@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
-import { Button } from 'react-bootstrap'
+import { Button, } from 'react-bootstrap'
 import './Welcome.css'
 
 class Welcome extends Component {
