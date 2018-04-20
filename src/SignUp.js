@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
-import Nav from './NavBar'
+import Nav from './Navigation'
 
 class SignUp extends Component {
   render() {

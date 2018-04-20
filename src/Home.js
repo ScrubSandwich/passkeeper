@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
 import Nav from './Navigation'
+import "./Home.css"
 
-class Login extends Component {
+class Home extends Component {
   render() {
     return (
-      <div className="login">
+      <div className="home">
         <Nav />
       </div>
     )
   }
 }
 
-export default Login;
+export default Home;

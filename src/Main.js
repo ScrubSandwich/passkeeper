@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-rou
 import Welcome from './Welcome'
 import SignUp from './SignUp';
 import Login from './Login';
+import Home from './Home'
 import './Main.css'
 
 class Main extends Component {
@@ -14,6 +15,7 @@ class Main extends Component {
             <Route exact path="/" component={Welcome} />
             <Route path="/sign-up" component={SignUp} />
             <Route path="/login" component={Login} />
+            <Route path="/home" component={Home} />
           </Switch>
         </div>
     )
