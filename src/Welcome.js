@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import './Welcome.css'
 
 class Welcome extends Component {
   render() {
@@ -8,18 +9,28 @@ class Welcome extends Component {
       <div className="welcome">
         <header className="App-header">
           <h1 id="title">
-            <span id="pass">PASS</span>
+            <span id="pass">trash</span>
             <span id="keeper">
-              <strong>keeper</strong>
+              <strong>pass</strong>
             </span>
           </h1>
           <p className="intro">
-            Your one-stop-shop for storing and managing your passwords securely
+            Your one-stop-shop for storing and managing your throw-away passwords
           </p>
         </header>
-        <div className="option">
-          <Link to="/login"><Button bsStyle="success">Login</Button></Link>
-          <Link to="/sign-up"><Button>Sign Up</Button></Link>
+        <div className="panel">
+          <div className="heading">
+            <h2>Login or Sign Up</h2>
+          </div>
+          
+          <div className="buttons">
+            <div className="button">
+              <Link to="/login"><Button bsStyle="success">Login</Button></Link>
+            </div>        
+            <div className="button">
+              <Link to="/sign-up"><Button bsStyle="info">Sign Up</Button></Link>
+            </div>
+          </div>
         </div>
       </div>
     )

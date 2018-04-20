@@ -1,0 +1,23 @@
+.panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 130px 1fr;
+}
+
+.buttons {
+  border: 2px solid slategray;
+  border-radius: 5px;
+  padding: 30px;
+  grid-row: 2;
+  grid-column: 2;
+}
+
+.button {
+  padding: 10px;
+}
+
+.heading {
+  grid-row: 1;
+  grid-column: 2;
+  padding-top: 30px;
+}

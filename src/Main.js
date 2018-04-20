@@ -22,7 +22,7 @@ class Main extends Component {
   render() {
     return (
       <div className="main">
-        < Welcome/>
+        {this.renderLinks()}
       </div>
     )
   }

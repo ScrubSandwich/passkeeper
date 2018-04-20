@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Trash Pass",
+  "name": "Your one stop shop for storing and managing all your throwaway passwords",
   "icons": [
     {
       "src": "favicon.ico",
