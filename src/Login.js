@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
-import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap'
+import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import Nav from './Navigation'
 import axios from "axios"
 class Login extends Component {
@@ -47,9 +47,14 @@ class Login extends Component {
     this.setState({ password: e.target.value});
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+
+  }
+
   renderLoginForm = () => {
     return (
-      <form>
+      <Form onSubmit={this.handleSubmit}>
         <FormGroup controlId="email" bsSize="large" validationState={this.getValidationStateEmail()}>
           <ControlLabel>Email</ControlLabel>
           <FormControl
@@ -68,7 +73,8 @@ class Login extends Component {
             onChange={this.handleChangePassword}
           />
         </FormGroup>
-      </form>
+        <Button type="submit">Submit</Button>
+      </Form>
     )
   }
 
@@ -76,6 +82,7 @@ class Login extends Component {
     return (
       <div className="login">
         <Nav />
+        <h1>Login</h1>
         <div className="form">
           {this.renderLoginForm()}
         </div>
