@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
 import { Button, } from 'react-bootstrap'
+import Nav from './Navigation'
 import './Welcome.css'
 
 class Welcome extends Component {
   render() {
     return (
       <div className="welcome">
-        <header className="App-header">
-          <h1 id="title">
-            <span id="pass">trash</span>
-            <span id="keeper">
-              <strong>pass</strong>
-            </span>
-          </h1>
+        <div className="App-header">
+          <div className="title">
+              <strong className="trash">trash</strong>
+              <strong className="pass">pass</strong>
+          </div>
           <p className="intro">
-            Your one-stop-shop for storing and managing your throw-away passwords
+            A simple throw-away account and password manager.
           </p>
-        </header>
+        </div>
         <div className="panel">
           <div className="heading">
-            <h2>Login or Sign Up</h2>
-          </div>
-          
+            <strong><h2>Login or Sign Up</h2></strong>
+          </div>          
           <div className="buttons">
             <div className="button">
               <Link to="/login"><Button bsStyle="success">Login</Button></Link>
