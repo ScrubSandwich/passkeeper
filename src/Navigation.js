@@ -7,7 +7,7 @@ class Navigation extends Component {
     super(props);
 
     this.state = {
-      name: "Jacob",
+      name: localStorage.getItem('name'),
     }
   }
   

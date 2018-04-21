@@ -1,0 +1,11 @@
+.records {
+  margin-top: 30px;
+  margin-left: 400px;
+  margin-right: 400px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.record {
+  border-style: solid;
+}
