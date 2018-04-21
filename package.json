@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "http://jmieczni.github.io/passkeeper",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.3.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
