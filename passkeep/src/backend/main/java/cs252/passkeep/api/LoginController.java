@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class LoginController {
+public class LoginController extends ValidationUtility{
 
     static final long EXPIRATIONTIME = 3_600_000; //
     static final String SECRET = "HardyGustavoMontoyaG";
@@ -61,7 +61,7 @@ public class LoginController {
 
             response.put("userId", user_id);
             response.put("token", JWT);
-
+            response.put("status",HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.info("Exception Message" + ex.getMessage());
             response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -70,6 +70,26 @@ public class LoginController {
         return response;
     }
 
+    public Map<String, Object> logout(@RequestBody Map<String,Object> body) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        try {
+            String userId = body.get("userId").toString();
+            String token = body.get("token").toString();
+            if (!isValidToken(token, userId) || isExpiredToken(token)) {
+                response.put("status", HttpStatus.INTERNAL_SERVER_ERROR + " - This token is not valid!");
+                return response;
+            } else {
+                jdbcTemplate.update("UPDATE users SET authentication_token = NULL WHERE user_id='" + userId + "'");
+                response.put("status", HttpStatus.OK);
+            }
+        } catch (DataAccessException ex) {
+            log.info("Exception Message" + ex.getMessage());
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException("[InternalServerError] - Error accessing data.");
+        }
+        response.put("status",HttpStatus.OK);
+        return response;
+    }
 
 
 
