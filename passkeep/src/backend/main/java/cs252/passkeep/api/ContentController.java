@@ -194,11 +194,8 @@ public class ContentController extends ValidationUtility {
             response.put("token", token);
             try {
                 Integer listSize = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM storage WHERE user_id='" + userId + "'", Integer.class);
-                if (listSize == 0) {
-                    response.put("list", "You have not added any entries yet.");
-                    return response;
-                }
-                List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT record_id FROM storage WHERE user_id = '" + userId + "'");
+
+                List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT record_id, title FROM storage WHERE user_id = '" + userId + "'");
                 response.put("list", list);
 
 
@@ -215,5 +212,6 @@ public class ContentController extends ValidationUtility {
         return response;
     }
 }
+
 
 
