@@ -19,7 +19,7 @@ import java.util.Map;
 @Service
 public class LoginController {
 
-    static final long EXPIRATIONTIME = 1_800_000; // 10 days
+    static final long EXPIRATIONTIME = 3_600_000; //
     static final String SECRET = "HardyGustavoMontoyaG";
 
     @Autowired
@@ -59,7 +59,7 @@ public class LoginController {
             //Insert the token into the database
             jdbcTemplate.update("UPDATE users SET token='" + JWT + "'" + " WHERE email ='" + email + "'");
 
-            response.put("user_id", user_id);
+            response.put("userId", user_id);
             response.put("token", JWT);
 
         } catch (DataAccessException ex) {
