@@ -10,9 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -30,10 +28,10 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.*;
 @Service
-public class ContentController extends ValidationUtility implements Serializable {
+public class ContentController extends ValidationUtility {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    //TODO code documentation
+
 
     private static final String KEY_1 = "ssdkF$HUy2AC5ftB";
     private static final String KEY_2 = "weJiSEvR5yA#D%kd";
@@ -101,8 +99,12 @@ public class ContentController extends ValidationUtility implements Serializable
                     jdbcTemplate.update("UPDATE storage SET notes='" + notes + "' WHERE record_id='" + newRecordId + "'");
 
                 }
-//
+//              i
+                if(body.containsKey("birthdate")){
+                    String bd = body.get("birthdate").toString();
+                    jdbcTemplate.update("UPDATE storage SET birthdate='" + bd + "' WHERE record_id='" + newRecordId + "'");
 
+                }
                 //
 
 
@@ -174,6 +176,7 @@ public class ContentController extends ValidationUtility implements Serializable
                 response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
                 throw new RuntimeException("[InternalServerError] - Error accessing data.");
             }
+            response.put("status",HttpStatus.OK);
             return response;
         }
 
@@ -197,7 +200,7 @@ public class ContentController extends ValidationUtility implements Serializable
                 }
                 List<Map<String, Object>> list = jdbcTemplate.queryForList("SELECT record_id FROM storage WHERE user_id = '" + userId + "'");
                 response.put("list", list);
-                return response;
+
 
 
             } catch (DataAccessException ex) {
@@ -208,5 +211,9 @@ public class ContentController extends ValidationUtility implements Serializable
             }
 
         }
+        response.put("status",HttpStatus.OK);
+        return response;
     }
 }
+
+
