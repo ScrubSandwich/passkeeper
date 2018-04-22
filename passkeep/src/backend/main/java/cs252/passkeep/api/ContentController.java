@@ -190,7 +190,7 @@ public class ContentController extends ValidationUtility {
             response.put("status", HttpStatus.INTERNAL_SERVER_ERROR + " - This token is not valid!");
             return response;
         } else {
-            response.put("userID", userId);
+            response.put("userId", userId);
             response.put("token", token);
             try {
                 Integer listSize = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM storage WHERE user_id='" + userId + "'", Integer.class);
