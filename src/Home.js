@@ -17,8 +17,8 @@ class Home extends Component {
       <div>
         <h1>Records</h1>
         <div className="records">
-            {this.state.records.map((record) =>
-              <div className="record">
+            {this.state.records.map((record, index) =>
+              <div className="record" key={index}>
                 <Link to={"/view-thread?id=" + record.id}>
                   <h2>{record.title}</h2>
                 </Link>

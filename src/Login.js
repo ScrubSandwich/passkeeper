@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-rou
 import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import Nav from './Navigation'
 import axios from "axios"
-class Login extends Component {
 
+class Login extends Component {
   constructor(props, context) {
     super(props, context);
 
@@ -14,11 +14,16 @@ class Login extends Component {
     this.state = {
       email: "",
       password: "",
+      redirect: false,
     }
   }
 
+  saveToLocalStorage = (key, data) => {
+    localStorage.setItem(key, data);
+  }
+
   componentDidUpdate = () => {
-    console.log(this.state)
+    //console.log(this.state)
   }
 
   getValidationStateEmail = () => {
@@ -49,6 +54,37 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const _this = this;
+
+    let payload = JSON.stringify({
+      "email": this.state.email,
+      "password": this.state.password,
+    });
+
+    fetch("http://localhost:8080/login", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'transfer-encoding': 'chunked',
+      },
+      body: payload,
+    })
+    .then(function(response) {
+      response.json().then(json => {
+        if (json.status == "OK") {
+          console.log("Login successful")
+          _this.saveToLocalStorage("token", json.token);
+          _this.saveToLocalStorage("id", json.userId);
+
+          _this.setState({
+            redirect: true,
+          })
+        } else {
+          alert(json.message)
+        }
+      });
+    })
 
   }
 
@@ -78,6 +114,10 @@ class Login extends Component {
     )
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) { return (<Redirect to="/home" />) }
+  }
+
   render() {
     return (
       <div className="login">
@@ -86,6 +126,7 @@ class Login extends Component {
         <div className="form">
           {this.renderLoginForm()}
         </div>
+        {this.renderRedirect()}
       </div>
     )
   }
