@@ -85,7 +85,6 @@ class Login extends Component {
         }
       });
     })
-
   }
 
   renderLoginForm = () => {
