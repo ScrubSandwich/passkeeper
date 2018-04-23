@@ -37,13 +37,13 @@ public class LoginController extends ValidationUtility{
             //Check if email exists
             Integer existingEmail = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM users WHERE email='" + email + "'", Integer.class);
             if (existingEmail <= 0) {
-                throw new RuntimeException("[BadRequest] - No user associated with this email address!");
+                throw new RuntimeException("No user associated with this email address!");
             }
 
             //Check if password matches
             String dbPassword = jdbcTemplate.queryForObject("SELECT password FROM users WHERE email='" + email + "'", String.class);
             if (!passwordEncoder.matches(password, dbPassword)) {
-                throw new RuntimeException("[BadRequest] - Incorrect password provided!");
+                throw new RuntimeException("Incorrect password provided!");
             }
 
             String user_id = jdbcTemplate.queryForObject("SELECT user_id FROM users WHERE email='" + email + "'", String.class);
@@ -61,6 +61,7 @@ public class LoginController extends ValidationUtility{
 
             response.put("userId", user_id);
             response.put("token", JWT);
+            response.put("email", email);
             response.put("status",HttpStatus.OK);
         } catch (DataAccessException ex) {
             log.info("Exception Message" + ex.getMessage());
@@ -79,7 +80,7 @@ public class LoginController extends ValidationUtility{
                 response.put("status", HttpStatus.INTERNAL_SERVER_ERROR + " - This token is not valid!");
                 return response;
             } else {
-                jdbcTemplate.update("UPDATE users SET authentication_token = NULL WHERE user_id='" + userId + "'");
+                jdbcTemplate.update("UPDATE users SET token = NULL WHERE user_id='" + userId + "'");
                 response.put("status", HttpStatus.OK);
             }
         } catch (DataAccessException ex) {
