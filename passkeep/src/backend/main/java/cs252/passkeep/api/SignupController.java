@@ -30,7 +30,7 @@ public class SignupController {
 
             List<Map<String, Object>> existingEmails = jdbcTemplate.queryForList("SELECT * FROM users WHERE email='" + email + "'");
             if (existingEmails.size() != 0) {
-                throw new RuntimeException("[BadRequest] - User with this email already exists!");
+                throw new RuntimeException("User with this email already exists!");
             }
 
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
