@@ -136,7 +136,7 @@ public class ContentController extends ValidationUtility {
                 response.put("recordId", query);
                 Integer existingRecord = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM storage WHERE record_id='" + recordId + "'", Integer.class);
                 if (existingRecord <= 0) {
-                    throw new RuntimeException("[BadRequest] - No record existing for this id!");
+                    throw new RuntimeException("No record existing for this id!");
                 }
 
                 List<Map<String, Object>> record = jdbcTemplate.queryForList("SELECT storage.user_id, record_id, title, password, email, username, birthdate, notes FROM storage WHERE record_id = '" + recordId + "'");
@@ -212,6 +212,4 @@ public class ContentController extends ValidationUtility {
         return response;
     }
 }
-
-
 
