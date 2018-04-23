@@ -85,6 +85,15 @@ public class PasskeepApplication {
 	public Map<String, Object> generateRandom(@RequestParam String id,@RequestParam String token,@RequestParam int len, @RequestParam String query){
 		return featuresController.generateRandom(id,token,len,query);
 	}
+	
+	@CrossOrigin
+	@RequestMapping(value = "/report/bug", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> bugReport(@Valid @RequestBody Map<String, Object> body) {
+		return featuresController.bugReport(body);
+
+	}
+	
 	public static void main(String[] args) {
 		SpringApplication.run(PasskeepApplication.class, args);
 	}
