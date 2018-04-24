@@ -10,11 +10,14 @@ import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.validation.Valid;
 import java.util.Map;
 
+@ComponentScan(basePackages = "cs252.passkeep.")
 
 @RestController
 @SpringBootApplication
@@ -40,6 +43,12 @@ public class PasskeepApplication {
 	public Map<String, Object> signUp(@Valid @RequestBody Map<String, Object> body) {
 		return signupController.signUp(body);
 	}
+	@CrossOrigin
+	@RequestMapping("/")
+	@ResponseBody
+	String home() {
+		return "Welcome to Passkeep. ";
+	}
 
     @CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -56,6 +65,13 @@ public class PasskeepApplication {
 
 	}
 
+	@CrossOrigin
+	@RequestMapping(value = "/record/delete", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deleteRecord(@Valid @RequestBody Map<String, Object> body) {
+		return contentController.deleteRecord(body);
+
+	}
 	@CrossOrigin
 	@RequestMapping(value = "/record/add", method = RequestMethod.POST)
 	@ResponseBody
@@ -85,7 +101,7 @@ public class PasskeepApplication {
 	public Map<String, Object> generateRandom(@RequestParam String id,@RequestParam String token,@RequestParam int len, @RequestParam String query){
 		return featuresController.generateRandom(id,token,len,query);
 	}
-	
+
 	@CrossOrigin
 	@RequestMapping(value = "/report/bug", method = RequestMethod.POST)
 	@ResponseBody
@@ -93,8 +109,10 @@ public class PasskeepApplication {
 		return featuresController.bugReport(body);
 
 	}
-	
-	public static void main(String[] args) {
+
+@Autowired
+	public static void main(String[] args)
+	{
 		SpringApplication.run(PasskeepApplication.class, args);
 	}
 }
