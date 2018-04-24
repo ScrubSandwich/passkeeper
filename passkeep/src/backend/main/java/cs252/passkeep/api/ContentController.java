@@ -4,9 +4,11 @@ import javafx.application.Application;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,10 +29,9 @@ import java.security.NoSuchAlgorithmException;
 
 
 import java.util.*;
+
 @Service
 public class ContentController extends ValidationUtility {
-
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 
     private static final String KEY_1 = "ssdkF$HUy2AC5ftB";
@@ -80,6 +81,11 @@ public class ContentController extends ValidationUtility {
                 String email = body.get("email").toString();
                 String password = body.get("password").toString();
                 String title = body.get("title").toString();
+                email = email.trim();
+                title = title.trim();
+                if(email.equals("")|| password.equals("") ||title.equals("")){
+                    throw new RuntimeException("Email/Title fields cannot be empty!");
+                }
                 String newRecordId = UUID.randomUUID().toString();
                 recordId = newRecordId;
                 try {
@@ -109,7 +115,7 @@ public class ContentController extends ValidationUtility {
 
 
             } catch (DataAccessException ex) {
-                log.info("Exception Message" + ex.getMessage());
+
                 response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
                 throw new RuntimeException("[InternalServerError] - Error accessing data.");
             }
@@ -172,7 +178,7 @@ public class ContentController extends ValidationUtility {
                 }
             } catch (DataAccessException ex) {
 
-                log.info("Exception Message" + ex.getMessage());
+
                 response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
                 throw new RuntimeException("[InternalServerError] - Error accessing data.");
             }
@@ -202,7 +208,6 @@ public class ContentController extends ValidationUtility {
 
             } catch (DataAccessException ex) {
 
-                log.info("Exception Message" + ex.getMessage());
                 response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
                 throw new RuntimeException("[InternalServerError] - Error accessing data.");
             }
@@ -211,5 +216,34 @@ public class ContentController extends ValidationUtility {
         response.put("status",HttpStatus.OK);
         return response;
     }
-}
 
+    public Map<String, Object> deleteRecord(@RequestBody Map<String, Object> body) {
+
+        Map<String, Object> response = new HashMap<String, Object>();
+        String recordId;
+        String userId = body.get("userId").toString();
+        String token = body.get("token").toString();
+        String record = body.get("recordId").toString();
+        if (!isValidToken(token, userId) || isExpiredToken(token)) {
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR + " - This token is not valid!");
+            return response;
+        } else {
+            try {
+                Integer existingRecord = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM storage WHERE record_id='" + record + "'", Integer.class);
+                if (existingRecord <= 0) {
+                    throw new RuntimeException("No record existing for this id!");
+                }
+                jdbcTemplate.update("DELETE FROM storage WHERE record_id = '" + record + "'");
+                response.put("status", HttpStatus.OK);
+                response.put("token", token);
+                response.put("userId", userId);
+            } catch (DataAccessException ex) {
+
+                response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new RuntimeException("[InternalServerError] - Error accessing data.");
+            }
+            return response;
+        }
+    }
+
+}
