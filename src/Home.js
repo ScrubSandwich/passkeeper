@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
-import { Alert } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import Nav from './Navigation'
 import "./Home.css"
 
@@ -60,15 +60,32 @@ class Home extends Component {
     
     return (
       <div>
-        <h1>Records</h1>
+        <h1>All Records</h1>
         <div className="records">
-            {this.state.records.map((record, index) =>
-              <div className="record" key={index}>
-                <Link to={"/view-record?id=" + record.record_id}>
-                  <h2>{record.title}</h2>
-                </Link>
-              </div>
-            )}       
+          <Table striped bordered condensed hover responsive>
+            <thead>
+              <tr>
+                <th>Number</th>
+                <th>Title</th>
+              </tr>
+            </thead>
+            <tbody>              
+                {this.state.records.map((record, index) =>
+                  <tr>
+                    <td>
+                      <h2>{index + 1}</h2>
+                    </td>
+                    <td>
+                      <div className="record" key={index}>
+                        <Link to={"/view-record?id=" + record.record_id}>
+                          <h2>{record.title}</h2>
+                        </Link>
+                      </div>
+                    </td>
+                  </tr>
+                )}              
+            </tbody>
+          </Table>     
         </div>
       </div>
     );
