@@ -61,7 +61,7 @@ class SignUp extends Component {
       "password": this.state.password,
     });
 
-    fetch("http://localhost:8080/login", {
+    fetch("https://passkeep.herokuapp.com/login", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -97,7 +97,7 @@ class SignUp extends Component {
       "password": this.state.password,
     });
 
-    fetch("http://localhost:8080/sign-up", {
+    fetch("https://passkeep.herokuapp.com/sign-up", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
