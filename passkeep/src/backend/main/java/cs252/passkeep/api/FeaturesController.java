@@ -18,7 +18,7 @@ import java.util.*;
 @Service
 public class FeaturesController extends ValidationUtility {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+
     @Autowired
     private JdbcTemplate jdbcTemplate;
     static SecureRandom rnd = new SecureRandom();
@@ -37,6 +37,75 @@ public class FeaturesController extends ValidationUtility {
         return sb.toString();
     }
 
+
+    public Map<String, Object> generateRandom(@RequestParam String userId, @RequestParam String token, @RequestParam int len, @RequestParam String query) {
+        String id = userId;
+
+        Map<String, Object> response = new HashMap<String, Object>();
+        if (!isValidToken(token, userId) || isExpiredToken(token)) {
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR + " - This token is not valid!");
+            return response;
+        } else {
+            response.put("userId", userId);
+            response.put("token", token);
+            try {
+                String gen = "";
+                if (query.equals("default")) {
+                    gen = generateRandomString(len, query);
+                } else if (query.equals("nospec")) {
+                    gen = generateRandomString(len, "nospec");
+                } else {
+                    throw new RuntimeException("Unrecognized parameter for query!");
+                }
+                response.put("generated", gen);
+            } catch (DataAccessException ex) {
+
+
+                response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new RuntimeException("[InternalServerError] - Error accessing data.");
+            }
+
+        }
+        response.put("status", HttpStatus.OK);
+        return response;
+    }
+
+    public Map<String, Object> bugReport(@RequestBody Map<String, Object> body) {
+        Map<String, Object> response = new HashMap<String, Object>();
+        String userId = body.get("userId").toString();
+        String token = body.get("token").toString();
+        String report = body.get("report").toString();
+        if (report == null){
+            throw new RuntimeException("Cannot send an empty report.");
+        }
+        if (!isValidToken(token, userId) || isExpiredToken(token)) {
+            response.put("status", HttpStatus.INTERNAL_SERVER_ERROR + " - This token is not valid!");
+            return response;
+        } else {
+            response.put("userId", userId);
+            response.put("token", token);
+            List<Map<String, Object>> repCount = jdbcTemplate.queryForList("SELECT * FROM bugs WHERE user_id='" + userId + "'");
+            if (repCount.size() >= 6) {
+                throw new RuntimeException("You have made too many reports (thank you), please wait until some are resolved.");
+            }
+            Date d = new Date();
+            Timestamp repDate = new Timestamp(d.getTime());
+            jdbcTemplate.update("INSERT INTO bugs (user_id, report, date) VALUES (?, ?, ?)",
+                    userId, report, repDate);
+
+
+            try {
+            } catch (DataAccessException ex) {
+
+
+                response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
+                throw new RuntimeException("[InternalServerError] - Error accessing data.");
+            }
+        }
+        response.put("status",HttpStatus.OK);
+        return response;
+    }
+}
 
     public Map<String, Object> generateRandom(@RequestParam String userId, @RequestParam String token, @RequestParam int len, @RequestParam String query) {
         String id = userId;
