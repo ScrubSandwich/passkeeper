@@ -25,7 +25,6 @@ public class LoginController extends ValidationUtility{
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
 
     public Map<String, Object> login(@RequestBody Map<String, String> body) {
         Map<String, Object> response = new HashMap<String, Object>();
@@ -64,7 +63,7 @@ public class LoginController extends ValidationUtility{
             response.put("email", email);
             response.put("status",HttpStatus.OK);
         } catch (DataAccessException ex) {
-            log.info("Exception Message" + ex.getMessage());
+
             response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
             throw new RuntimeException("[InternalServerError] - Error accessing data.");
         }
@@ -84,7 +83,7 @@ public class LoginController extends ValidationUtility{
                 response.put("status", HttpStatus.OK);
             }
         } catch (DataAccessException ex) {
-            log.info("Exception Message" + ex.getMessage());
+
             response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
             throw new RuntimeException("[InternalServerError] - Error accessing data.");
         }
