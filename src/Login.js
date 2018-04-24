@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
 import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
-import Nav from './Navigation'
+import Header from './Header'
 import axios from "axios"
 
 class Login extends Component {
@@ -121,7 +121,7 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <Nav />
+        <Header />
         <h1>Login</h1>
         <div className="form">
           {this.renderLoginForm()}
