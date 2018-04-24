@@ -36,7 +36,6 @@ class Home extends Component {
     })
     .then(function(response) {
       response.json().then(json => {
-        console.log(json)
         if (json.status == "OK") {
           _this.setState({
             records: json.list,

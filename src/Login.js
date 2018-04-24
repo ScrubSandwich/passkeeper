@@ -73,9 +73,10 @@ class Login extends Component {
     .then(function(response) {
       response.json().then(json => {
         if (json.status == "OK") {
-          console.log("Login successful")
+          console.log(json)
           _this.saveToLocalStorage("token", json.token);
           _this.saveToLocalStorage("id", json.userId);
+          _this.saveToLocalStorage("email", json.email);
 
           _this.setState({
             redirect: true,
