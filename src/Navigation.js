@@ -38,7 +38,7 @@ class Navigation extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="/">Trash Pass</a>
+            <a href="/home">Pass Keep</a>
           </Navbar.Brand>
         </Navbar.Header>
         <Nav pullRight>
