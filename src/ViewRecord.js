@@ -19,7 +19,7 @@ class ViewRecord extends Component {
   }
 
   componentDidMount = () => {
-    let url = "http://localhost:8080/record/get?id=" + localStorage.getItem("id") + "&token=" + localStorage.getItem("token") + "&query=" + this.state.recordId
+    let url = "https://passkeep.herokuapp.com/record/get?id=" + localStorage.getItem("id") + "&token=" + localStorage.getItem("token") + "&query=" + this.state.recordId
     const _this = this;
 
     axios.get(url)
