@@ -4,6 +4,7 @@ import Welcome from './Welcome'
 import SignUp from './SignUp';
 import Login from './Login';
 import Home from './Home'
+import ViewRecord from './ViewRecord'
 import './Main.css'
 
 class Main extends Component {
@@ -16,6 +17,7 @@ class Main extends Component {
             <Route path="/sign-up" component={SignUp} />
             <Route path="/login" component={Login} />
             <Route path="/home" component={Home} />
+            <Route path="/view-record" component={ViewRecord} />
           </Switch>
         </div>
     )

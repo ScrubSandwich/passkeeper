@@ -76,6 +76,7 @@ class SignUp extends Component {
           console.log("Login successful")
           _this.saveToLocalStorage("token", json.token);
           _this.saveToLocalStorage("id", json.userId);
+          _this.saveToLocalStorage("email", json.email);
 
           _this.setState({
             redirect: true,

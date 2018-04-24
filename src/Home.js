@@ -13,6 +13,10 @@ class Home extends Component {
     }
   }
 
+  componentDidUpdate = () => {
+    console.log(this.state)
+  }
+
   getLocalStorage = (key) => {
     return localStorage.getItem(key);
   }
@@ -60,7 +64,7 @@ class Home extends Component {
         <div className="records">
             {this.state.records.map((record, index) =>
               <div className="record" key={index}>
-                <Link to={"/view-thread?id=" + record.id}>
+                <Link to={"/view-record?id=" + record.record_id}>
                   <h2>{record.title}</h2>
                 </Link>
               </div>
