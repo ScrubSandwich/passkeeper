@@ -5,3 +5,8 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
 }
+
+.bread {
+  width: 30%;
+  padding-left: 140px;
+}

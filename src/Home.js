@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-router-dom'
-import { Table } from 'react-bootstrap'
+import { Table, Breadcrumb } from 'react-bootstrap'
 import Nav from './Navigation'
 import "./Home.css"
 
@@ -91,10 +91,21 @@ class Home extends Component {
     );
   }
 
+  renderBread = () => {
+    return (
+      <div className="bread">
+        <Breadcrumb>
+          <Breadcrumb.Item active>All Records</Breadcrumb.Item>
+        </Breadcrumb>
+      </div>
+    )
+  }
+
   render() {
     return (
       <div className="home">
         <Nav />
+        {this.renderBread()}
         {this.renderRecords()}
       </div>
     )
