@@ -23,7 +23,7 @@ import java.util.Date;
 
 @Service
 public class ValidationUtility {
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+
     //TODO code documentation
 
     @Autowired
@@ -51,7 +51,7 @@ public class ValidationUtility {
                 return true;
             }
         } catch (JwtException ex) {
-            log.info("Error validating token. Exception Message " + ex.getMessage());
+
             return false;
         }
     }
@@ -78,7 +78,7 @@ public class ValidationUtility {
                 return false;
             }
         } catch (JwtException ex) {
-            log.info("Error validating token. Exception Message " + ex.getMessage());
+
             return true;
         }
     }
