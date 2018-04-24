@@ -8,11 +8,13 @@
 
 .title {
   border-radius: 40px;
-  background: #8a8a8af6;
+  background: #a4fcfff6;
   align-items: center;
   justify-content: center;
   height: 140px;
   margin-top: 0;
+  margin-left: 200px;
+  margin-right: 200px;
   margin-bottom: 20px;
 }
 
@@ -23,7 +25,11 @@
 .panel {
   display: grid;
   grid-template-columns: 1fr 250px 1fr;
-  grid-template-rows: 130px 185px;
+  grid-template-rows: 130px 185px 1fr;
+}
+
+.spacer {
+  grid-row: 3;
 }
 
 .heading {
@@ -36,9 +42,9 @@
 
 .buttons {
   border: 2px solid slategray;
-  background-color: slategray;
+  background-color: #a4fcfff6;
   border-radius: 5px;
-  padding: 0px;
+  padding-top: 30px;
   grid-row: 2;
   grid-column: 2;
 }
@@ -46,10 +52,6 @@
 .button {
   padding: 10px;
 }
-
-
-
-
 
 .trash {
   font-style: italic;

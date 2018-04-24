@@ -10,11 +10,11 @@ class Welcome extends Component {
       <div className="welcome">
         <div className="App-header">
           <div className="title">
-              <strong className="trash">trash</strong>
-              <strong className="pass">pass</strong>
+              <strong className="trash">pass</strong>
+              <strong className="pass">keep</strong>
           </div>
           <p className="intro">
-            A simple throw-away account and password manager.
+            A simple throw-away account information manager.
           </p>
         </div>
         <div className="panel">
@@ -28,6 +28,11 @@ class Welcome extends Component {
             <div className="button">
               <Link to="/sign-up"><Button bsStyle="info">Sign Up</Button></Link>
             </div>
+          </div>
+          <div className="spacer">
+            <h2>&#160;</h2>
+            <h2>&#160;</h2>
+            <h2>&#160;</h2>
           </div>
         </div>
       </div>
