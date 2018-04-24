@@ -74,7 +74,7 @@ class Navigation extends Component {
       "birthdate": this.state.birthdate,
     });
 
-    fetch("http://localhost:8080/record/add", {
+    fetch("http://passkeep.herokuapp.com/record/add", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
