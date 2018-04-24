@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -18,7 +19,7 @@ public class SignupController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+
 
     public Map<String, Object> signUp(@RequestBody Map<String, Object> body){
         Map<String, Object> response = new HashMap<String,Object>();
@@ -43,14 +44,10 @@ public class SignupController {
             return response;
 
         } catch (DataAccessException ex) {
-            log.info("Exception Message" + ex.getMessage());
+
             response.put("status", HttpStatus.INTERNAL_SERVER_ERROR);
             throw new RuntimeException("[InternalServerError] - Error accessing data.");
 
         }
-
-
-
     }
-
 }
