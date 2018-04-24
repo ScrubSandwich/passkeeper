@@ -36,7 +36,6 @@ class ViewRecord extends Component {
         <Table striped bordered condensed hover responsive>
           <thead>
             <tr>
-              <th>Title</th>
               <th>Email</th>
               <th>Username</th>
               <th>Birthday</th>
@@ -45,7 +44,6 @@ class ViewRecord extends Component {
           </thead>
           <tbody>
             <tr>
-              <td>{this.state.title}</td>
               <td>{this.state.email}</td>
               <td>{this.state.username}</td>
               <td>{this.state.birthdate}</td>
