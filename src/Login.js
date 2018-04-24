@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Link, Redirect, Switch} from 'react-rou
 import { Form, FormGroup, ControlLabel, FormControl, Button } from 'react-bootstrap'
 import Header from './Header'
 import axios from "axios"
+import "./Login.css"
 
 class Login extends Component {
   constructor(props, context) {
@@ -90,27 +91,29 @@ class Login extends Component {
 
   renderLoginForm = () => {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormGroup controlId="email" bsSize="large" validationState={this.getValidationStateEmail()}>
-          <ControlLabel>Username</ControlLabel>
-          <FormControl
-            type="text"
-            value={this.state.email}
-            placeholder="Username"
-            onChange={this.handleChangeEmail}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" bsSize="large" validationState={this.getValidationStatePassword()}>
-          <ControlLabel>Password</ControlLabel>
-          <FormControl
-            type="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={this.handleChangePassword}
-          />
-        </FormGroup>
-        <Button type="submit">Submit</Button>
-      </Form>
+      <div className="formm">
+        <Form onSubmit={this.handleSubmit}>
+          <FormGroup controlId="email" bsSize="large" validationState={this.getValidationStateEmail()}>
+            <ControlLabel>Username</ControlLabel>
+            <FormControl
+              type="text"
+              value={this.state.email}
+              placeholder="Username"
+              onChange={this.handleChangeEmail}
+            />
+          </FormGroup>
+          <FormGroup controlId="password" bsSize="large" validationState={this.getValidationStatePassword()}>
+            <ControlLabel>Password</ControlLabel>
+            <FormControl
+              type="password"
+              value={this.state.password}
+              placeholder="Password"
+              onChange={this.handleChangePassword}
+            />
+          </FormGroup>
+          <Button type="submit">Submit</Button>
+        </Form>
+      </div>
     )
   }
 
@@ -122,7 +125,9 @@ class Login extends Component {
     return (
       <div className="login">
         <Header />
-        <h1>Login</h1>
+        <div className="heading">
+          <strong><h1>Login</h1></strong>
+        </div>
         <div className="form">
           {this.renderLoginForm()}
         </div>

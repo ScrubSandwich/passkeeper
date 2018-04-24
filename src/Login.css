@@ -1,0 +1,16 @@
+.formm {
+  margin-left: 300px;
+  margin-right: 300px;
+  padding: 40px;
+  border-style: solid;
+  border-color: black;
+  border-radius: 10px;
+}
+
+.heading {
+  grid-row: 1;
+  grid-column: 2;
+  padding: 20px;
+  font-size: 48px;
+  font-family: 'Bitter', sans-serif;
+}
