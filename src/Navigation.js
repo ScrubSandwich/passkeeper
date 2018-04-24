@@ -164,7 +164,7 @@ class Navigation extends Component {
               <FormControl
                 type="password"
                 value={this.state.password}
-                placeholder="Email"
+                placeholder="Password"
                 onChange={this.handleChangePassword}
               />
             </FormGroup>

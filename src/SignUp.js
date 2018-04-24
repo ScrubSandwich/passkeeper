@@ -122,11 +122,11 @@ class SignUp extends Component {
     return (
       <Form onSubmit={this.handleSubmit}>
         <FormGroup controlId="email" bsSize="large" validationState={this.getValidationStateEmail()}>
-          <ControlLabel>Email</ControlLabel>
+          <ControlLabel>Username</ControlLabel>
           <FormControl
             type="text"
             value={this.state.email}
-            placeholder="Email"
+            placeholder="Username"
             onChange={this.handleChangeEmail}
           />
         </FormGroup>
