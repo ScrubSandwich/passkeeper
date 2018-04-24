@@ -29,7 +29,7 @@ class Home extends Component {
       "token": this.getLocalStorage("token"),
     });
 
-    fetch("http://localhost:8080/record/list", {
+    fetch("https://passkeep.herokuapp.com/record/list", {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
