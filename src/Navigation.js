@@ -16,6 +16,7 @@ class Navigation extends Component {
       password: "",
       username: "",
       birthdate: "",
+      redirect: false,
     }
   }
 
@@ -29,6 +30,45 @@ class Navigation extends Component {
 
   handleShow() {
     this.setState({ show: true });
+  }
+
+  clearLocalStorage = () => {
+    localStorage.clear();
+  }
+
+  handleLogout = (e) => {
+    e.preventDefault();
+    
+    const _this = this;
+
+    const id = localStorage.getItem("id");
+    const token = localStorage.getItem("token");
+
+    let payload = JSON.stringify({
+      "userId": id,
+      "token": token,
+    });
+
+    fetch("http://passkeep.herokuapp.com/logout", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json;charset=UTF-8',
+        'transfer-encoding': 'chunked',
+      },
+      body: payload,
+    })
+    .then(function(response) {
+      response.json().then(json => {        
+        if (json.status == "OK") {
+          console.log("Logout Successful")
+          _this.clearLocalStorage();
+          _this.setState({ redirect: true, })
+        } else {
+          alert("Error communicating with server. Are you logged in?")
+        }
+      });
+    })
   }
 
   renderNav = () => {
@@ -50,7 +90,7 @@ class Navigation extends Component {
               Account
             </NavItem>
             <MenuItem divider />
-            <MenuItem eventKey={2.2}>Logout</MenuItem>
+            <MenuItem eventKey={2.2} onClick={this.handleLogout}>Logout</MenuItem>
           </NavDropdown>
         </Nav>
       </Navbar>
@@ -176,12 +216,21 @@ class Navigation extends Component {
       </Modal>
     )
   }
+
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return (
+        <Redirect to="/" />
+      )
+    }
+  }
   
   render() {
     return (
       <div>
         {this.renderNav()}
         {this.renderModal()}
+        {this.renderRedirect()}
       </div>  
     )
   }
