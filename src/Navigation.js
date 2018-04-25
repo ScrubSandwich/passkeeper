@@ -128,6 +128,8 @@ class Navigation extends Component {
         console.log(json)
         if (json.status == "OK") {
           _this.handleClose();
+          alert("Record Created")
+          window.location.reload();
         } else {
           alert("Error accessing database. Please try again later")
         }
