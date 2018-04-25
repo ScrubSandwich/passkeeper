@@ -36,3 +36,5 @@ Open up your favorite terminal and run the following commands to deploy
 * MySQL
 * Github
 * Heroku
+* AWS RDS
+* Maven
