@@ -16,6 +16,7 @@ class SignUp extends Component {
     this.state = {
       email: "",
       password: "",
+      password2: "",
       redirect: false,
     }
   }
@@ -45,6 +46,10 @@ class SignUp extends Component {
 
   handleChangePassword = (e) => {
     this.setState({ password: e.target.value});
+  }
+
+  handleChangePassword2 = (e) => {
+    this.setState({ password2: e.target.value});
   }
 
   login = () => {
@@ -84,6 +89,24 @@ class SignUp extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    //See if username is not blank
+    if (this.state.email.length == 0) {
+      alert("Please enter in a username")
+      return;
+    }
+
+    //See if password is of length
+    if (this.state.password.length < 8) {
+      alert("Password needs to be at least 8 characters long")
+      return;
+    }
+
+    //See if passwords match
+    if (this.state.password !== this.state.password2) {
+      alert("Passwords do not match")
+      return;
+    }
     const _this = this;
 
     let payload = JSON.stringify({
@@ -132,6 +155,15 @@ class SignUp extends Component {
               value={this.state.password}
               placeholder="Password"
               onChange={this.handleChangePassword}
+            />
+          </FormGroup>
+          <FormGroup controlId="password2" bsSize="large" validationState={this.getValidationStatePassword()}>
+            <ControlLabel>Repeat Password</ControlLabel>
+            <FormControl
+              type="password"
+              value={this.state.password2}
+              placeholder="Repeat Password"
+              onChange={this.handleChangePassword2}
             />
           </FormGroup>
           <Button type="submit">Submit</Button>
