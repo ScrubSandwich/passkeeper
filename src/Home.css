@@ -1,12 +1,23 @@
 .records {
   margin-top: 30px;
-  margin-left: 400px;
-  margin-right: 400px;
+  margin-left: 450px;
+  margin-right: 450px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
 }
 
+.top {
+  display: grid;
+  grid-template-columns: 1fr 200px 200px;
+  
+  padding-right: 200px;
+  padding-top: 0px;
+}
+
 .bread {
-  width: 30%;
-  padding-left: 140px;
+  grid-column: 1 / 2;
+}
+
+.deleteButton {
+  grid-column: 3;
 }
