@@ -61,7 +61,7 @@ class Navigation extends Component {
     .then(function(response) {
       response.json().then(json => {        
         if (json.status == "OK") {
-          console.log("Logout Successful")
+          alert("Logout Successful")
           _this.clearLocalStorage();
           _this.setState({ redirect: true, })
         } else {
@@ -86,10 +86,6 @@ class Navigation extends Component {
             New Record
           </NavItem>
           <NavDropdown eventKey={2} title={name} id="basic-nav-dropdown">
-            <NavItem eventKey={2.1} href="/account">
-              Account
-            </NavItem>
-            <MenuItem divider />
             <MenuItem eventKey={2.2} onClick={this.handleLogout}>Logout</MenuItem>
           </NavDropdown>
         </Nav>
@@ -162,7 +158,7 @@ class Navigation extends Component {
       <Modal show={this.state.show} onHide={this.handleClose}>
         <Form onSubmit={this.handleSubmit}>
           <Modal.Header closeButton>
-            <Modal.Title> Create New Record</Modal.Title>
+            <Modal.Title>Create New Record</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <FormGroup controlId="title" bsSize="large">
