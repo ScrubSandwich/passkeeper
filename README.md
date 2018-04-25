@@ -2,7 +2,7 @@
 This project was created as Lab 6 for CS252 Systems Programming at Purdue University
 
 ## About
-This application is on online storage space for users' login information for different websites.
+This application is on online storage space for users' login information for different throwaway accounts.
 Users can add usernames and passwords, veiw them, and delete them after logging in.
 
 ## Group members:
